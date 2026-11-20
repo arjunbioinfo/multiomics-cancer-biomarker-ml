@@ -2,6 +2,7 @@
 
 [![CI](https://github.com/arjunbioinfo/multiomics-cancer-biomarker-ml/actions/workflows/ci.yml/badge.svg)](https://github.com/arjunbioinfo/multiomics-cancer-biomarker-ml/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+[![Software DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.24392063.svg)](https://doi.org/10.5281/zenodo.24392063)
 
 A reproducible, config-driven **Snakemake + Python** workflow for benchmarking whether **TCGA RNA-seq expression**, **GISTIC2 gene-level copy number variation (CNV)**, or both together predict a clinical outcome. It uses leak-free cross-validated classification (`scikit-learn`), **SHAP** feature attribution, and out-of-fold penalized **Cox / Kaplan–Meier** survival scoring (`lifelines`).
 
