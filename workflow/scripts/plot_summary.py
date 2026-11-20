@@ -66,7 +66,7 @@ def plot_modality_benchmark(metrics_df: pd.DataFrame, oof_df: pd.DataFrame, coho
 
 
 def plot_shap_biomarkers(shap_df: pd.DataFrame, cohort: str, out_path: Path) -> None:
-    """2-panel figure: Top 15 SHAP biomarkers colored by modality + modality share breakdown."""
+    """2-panel figure: top 15 SHAP-ranked features coloured by modality + modality share breakdown."""
     fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(12.0, 5.2), gridspec_kw={"width_ratios": [1.6, 1.0]})
 
     top = shap_df.head(15).copy().iloc[::-1]
@@ -76,7 +76,7 @@ def plot_shap_biomarkers(shap_df: pd.DataFrame, cohort: str, out_path: Path) -> 
 
     ax1.barh(labels, top["mean_abs_shap"], color=colors, alpha=0.88, height=0.68)
     ax1.set_xlabel("Mean |SHAP value| (impact on model output)")
-    ax1.set_title(f"{cohort}: Top 15 Multi-Omics Biomarkers (SHAP)", fontweight="bold")
+    ax1.set_title(f"{cohort}: Top 15 SHAP-Ranked Features", fontweight="bold")
     ax1.tick_params(axis="y", labelsize=8.8)
 
     mod_share = shap_df.groupby("modality", as_index=False)["shap_share_pct"].sum()
@@ -130,7 +130,7 @@ def plot_survival_stratification(surv_oof: pd.DataFrame, cohort: str, out_path: 
 
 
 def plot_cox_forest(cox_df: pd.DataFrame, cohort: str, out_path: Path) -> None:
-    """Forest plot of multivariate penalized Cox hazard ratios for top SHAP multi-omics biomarkers."""
+    """Forest plot of multivariate penalized Cox hazard ratios for the top SHAP-ranked features."""
     df = cox_df.head(12).copy().reset_index(drop=True)
     fig, ax = plt.subplots(figsize=(7.8, 5.0))
     y = np.arange(len(df))
