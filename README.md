@@ -21,6 +21,9 @@ The out-of-fold Cox model on the ten top-ranked features is also uninformative: 
 
 **How to read this.** Because feature selection and scaling happen inside each training fold, these estimates are not inflated by information leaking from the test samples. On this cohort and target, bulk expression and gene-level copy number do not separate early from advanced stage. The SHAP rankings and Cox hazard ratios therefore describe a model with no predictive value; they are not candidate biomarkers. The workflow is useful as a leak-free benchmarking template: point it at another TCGA cohort or another outcome and it reports honestly whether a signal exists.
 
+![Cross-validated ROC-AUC per modality and model, with out-of-fold ROC curves](figures/modality_model_benchmark.png)
+![Top SHAP-ranked features and modality attribution share](figures/shap_biomarkers_summary.png)
+
 ## Pipeline Overview
 
 1. **Multi-Omics Download & Alignment (`download_multiomics.py`)**: Fetches `TCGA-LUSC` log2-normalized RNA-seq (`HiSeqV2`), GISTIC2 gene-level CNV (`Gistic2_CopyNumber_Gistic2_all_data_by_genes`), overall survival (`LUSC_survival.txt`), and clinical stage metadata (`LUSC_clinicalMatrix`) from UCSC Xena ([UCSC Xena, TCGA-LUSC cohort](https://xenabrowser.net/datapages/?cohort=TCGA%20Lung%20Squamous%20Cell%20Carcinoma%20(LUSC))), filters to primary tumors (`-01`) with `OS.time >= 30` days, intersects patients across both modalities, and logs exact provenance in `data/raw/download_manifest.json`.
