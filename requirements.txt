@@ -1,0 +1,12 @@
+snakemake>=8.20,<9
+numpy>=1.26,<2.1
+pandas>=2.2,<2.3
+scipy>=1.13,<1.15
+scikit-learn>=1.5,<1.7
+shap>=0.45,<0.47
+lifelines>=0.29,<0.31
+matplotlib>=3.9,<3.10
+seaborn>=0.13,<0.14
+PyYAML>=6.0
+requests>=2.32
+pytest>=8.3

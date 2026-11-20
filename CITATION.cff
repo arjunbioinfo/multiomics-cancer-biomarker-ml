@@ -1,0 +1,29 @@
+cff-version: 1.2.0
+message: "If you use this workflow or code in your research, please cite it as below."
+type: software
+title: "multiomics-cancer-biomarker-ml: Reproducible multi-omics cancer biomarker discovery with scikit-learn, SHAP, and lifelines"
+version: 0.1.0
+date-released: 2026-11-20
+license: MIT
+url: "https://arjunbioinfo.github.io/"
+repository-code: "https://github.com/arjunbioinfo/multiomics-cancer-biomarker-ml"
+authors:
+  - family-names: "Thippana"
+    given-names: "Mallikarjuna"
+    affiliation: "Department of Oncology-Pathology, Karolinska Institutet"
+    orcid: "https://orcid.org/0000-0001-8485-8626"
+keywords:
+  - bioinformatics
+  - multi-omics
+  - cancer-genomics
+  - machine-learning
+  - scikit-learn
+  - SHAP
+  - survival-analysis
+  - lifelines
+  - Snakemake
+abstract: >-
+  A config-driven Snakemake and Python pipeline integrating TCGA RNA-seq expression
+  and GISTIC2 gene-level copy number variation for leak-free cross-validated clinical
+  classification, SHAP biomarker attribution, and out-of-fold penalized Cox/Kaplan-Meier
+  survival stratification.
