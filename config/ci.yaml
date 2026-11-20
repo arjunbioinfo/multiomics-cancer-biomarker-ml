@@ -4,7 +4,7 @@ _config_path: "config/ci.yaml"
 
 cohort:
   name: "TCGA-LUSC"
-  xena_host: "https://tcga-xena-hub.s3.us-east-1.amazonaws.com"
+  xena_host: "https://tcga.xenahubs.net"
   rna_dataset: "TCGA.LUSC.sampleMap/HiSeqV2.gz"
   cnv_dataset: "TCGA.LUSC.sampleMap/Gistic2_CopyNumber_Gistic2_all_data_by_genes.gz"
   survival_dataset: "survival/LUSC_survival.txt"
