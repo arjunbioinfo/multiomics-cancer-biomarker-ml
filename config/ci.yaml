@@ -1,0 +1,30 @@
+# Fast CI configuration: real TCGA-LUSC RNA-seq + GISTIC2 CNV + survival cohort via UCSC Xena
+
+_config_path: "config/ci.yaml"
+
+cohort:
+  name: "TCGA-LUSC"
+  xena_host: "https://tcga-xena-hub.s3.us-east-1.amazonaws.com"
+  rna_dataset: "TCGA.LUSC.sampleMap/HiSeqV2.gz"
+  cnv_dataset: "TCGA.LUSC.sampleMap/Gistic2_CopyNumber_Gistic2_all_data_by_genes.gz"
+  survival_dataset: "survival/LUSC_survival.txt"
+  clinical_dataset: "TCGA.LUSC.sampleMap/LUSC_clinicalMatrix"
+  min_os_days: 30
+
+features:
+  top_rna_features: 120
+  top_cnv_features: 80
+
+ml:
+  n_cv_splits: 5
+
+survival:
+  top_shap_features_for_cox: 10
+  cox_penalizer: 0.1
+
+random_seed: 42
+
+output_dirs:
+  data: "data/raw"
+  results: "results"
+  figures: "figures"
