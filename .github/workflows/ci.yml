@@ -1,0 +1,55 @@
+name: CI — Multi-Omics Cancer Biomarker ML, SHAP & Survival
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  test-and-run:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: "pip"
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Run offline unit tests
+        run: pytest -v tests/
+
+      - name: Run Snakemake pipeline on real TCGA-LUSC multi-omics data
+        run: |
+          snakemake --cores 2 --configfile config/ci.yaml --config _config_path=config/ci.yaml
+
+      - name: Verify expected outputs
+        run: |
+          test -s results/cv_benchmark_metrics.tsv
+          test -s results/oof_predictions.tsv
+          test -s results/shap_biomarker_importance.tsv
+          test -s results/survival_oof_scores.tsv
+          test -s results/survival_cox_biomarkers.tsv
+          test -s figures/modality_model_benchmark.png
+          test -s figures/shap_biomarkers_summary.png
+          test -s figures/survival_risk_stratification.png
+          test -s figures/cox_hazard_forest.png
+
+      - name: Upload CI figures and summary tables
+        uses: actions/upload-artifact@v4
+        with:
+          name: ci-tcga-lusc-outputs
+          path: |
+            results/cv_benchmark_metrics.tsv
+            results/shap_biomarker_importance.tsv
+            results/survival_cox_biomarkers.tsv
+            figures/*.png
