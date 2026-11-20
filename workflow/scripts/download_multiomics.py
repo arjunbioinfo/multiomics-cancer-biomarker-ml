@@ -101,7 +101,12 @@ def align_multiomics_cohort(
     min_os_days: int = 30,
 ) -> tuple[pd.DataFrame, pd.DataFrame, pd.DataFrame]:
     """Intersect primary tumors across RNA, CNV, survival, and clinical tables."""
-    sample_col = next((c for c in ("sample", "Sample", "_PATIENT") if c in surv_df.columns), surv_df.columns[0])
+    # Prefer sample-level barcodes (e.g. TCGA-18-3406-01); "_PATIENT" holds patient barcodes that
+    # never match the sample-level columns of the omics matrices.
+    sample_col = next(
+        (c for c in ("xena_sample", "sample", "Sample", "sampleID", "_PATIENT") if c in surv_df.columns),
+        surv_df.columns[0],
+    )
     surv = pd.DataFrame(
         {
             "sample": surv_df[sample_col].astype(str),
